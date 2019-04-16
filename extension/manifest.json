@@ -14,11 +14,12 @@
 
     "content_scripts": [
         {
-            "matches": ["http://microsoft.stargym.com.cn/*"],
+            "matches": ["https://ea.azure.cn/*"],
             "js": [
                     "/js/external/jquery.js",
                     "/js/content_script.js"
-                ]
+                ],
+                "run_at": "document_start"
         }
     ],
 
