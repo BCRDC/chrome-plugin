@@ -1,5 +1,5 @@
 {
-    "name": "My awesome extension :)",
+    "name": "ABUS Data Collector",
     "version": "0.1",
     "icons": {
         "16": "/img/icons/icon_16.png",
@@ -16,7 +16,7 @@
         {
             "matches": ["https://ea.azure.cn/*"],
             "js": [
-                    "/js/external/jquery.js",
+                    "/js/external/jquery.min.js",
                     "/js/content_script.js"
                 ],
                 "run_at": "document_start"
