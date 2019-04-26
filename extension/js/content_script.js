@@ -2,16 +2,59 @@
 
 // var Request = require("sdk/request").Request;
 
+
+const localStorage = window.localStorage;
+
+const Status = {
+    Open: "Open",
+    Close: "Close"
+}
+
+const autoSendingStatus = localStorage.getItem('autoSendingStatus') || Status.Open;
+
+
+
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        console.log(sender.tab ?
+            "from a content script:" + sender.tab.url :
+            "from the extension");
+
+        const { action, data } = request;
+        switch (action) {
+            case 'setAutoSendingStatus': {
+                localStorage.setItem('autoSendingStatus', data)
+                sendResponse({ farewell: "goodbye" });
+                break;
+            }
+            case 'getAutoSendingStatus': {
+                const currentAutoSendingStatus = localStorage.getItem('autoSendingStatus') || Status.Open;
+                chrome.runtime.sendMessage({
+                    // autoSendingStatus: autoSendingStatus,
+                    action: 'fetchedAutoSendingStatus',
+                    data: currentAutoSendingStatus
+                }, function (response) {
+                    console.log(response);
+                });
+                break;
+            }
+        }
+        sendResponse();
+
+    });
+
+
+
 const createGet = url => {
-    let headers = new Headers({"Accept": "application/json"});
-    let init = {method: 'GET', headers};
+    let headers = new Headers({ "Accept": "application/json" });
+    let init = { method: 'GET', headers };
     let request = new Request(url, init);
 
     return fetch(request).then(response => {
         if (response.status === 200) {
             return response.json();
         } else {
-            throw new Error('Something went wrong on api server!');
+            return Promise.reject('Something went wrong on api server!');
         }
     });
 
@@ -23,17 +66,20 @@ const createPut = (url, input) => {
         "Accept": "application/json",
         contentType: 'application/json; charset=utf-8'
     });
-    let init = {method: 'PUT', headers, body: input};
+    let init = { method: 'PUT', headers, body: input };
     let request = new Request(url, init);
 
     return fetch(request // body data type must match "Content-Type" header
-).then(response => {
+    ).then(response => {
         if (response.status === 200) {
             return response.json();
         } else {
-            throw new Error('Something went wrong on api server!');
+            return Promise.reject('Something went wrong on api server!');
         }
-    });
+    }).catch(e =>{
+        return Promise.reject('Something went wrong on api server!');
+    })
+    ;
 
 }
 
@@ -103,23 +149,28 @@ const putData = (input) => {
 }
 
 
-getEnrollments().then(data => {
-    console.log(data);
-    const enroll = data[0];
-    const { id } = enroll;
-    Promise.all([
-        getDepartments(id),
-        getAccounts(id),
-        getSubsList(id)
-    ]).then(d => {
-        putData({
-            enrollmentEntity: enroll,
-            departmentResult: d[0],
-            acctResult: d[1],
-            subResult: d[2]
+if (autoSendingStatus === Status.Open) {
+    getEnrollments().then(data => {
+        console.log(data);
+        const enroll = data[0];
+        const { id } = enroll;
+        Promise.all([
+            getDepartments(id),
+            getAccounts(id),
+            getSubsList(id)
+        ]).then(d => {
+            return putData({
+                enrollmentEntity: enroll,
+                departmentResult: d[0],
+                acctResult: d[1],
+                subResult: d[2]
+            });
+            console.log(d);
         });
-        console.log(d);
-    });
 
-});
+    });
+}
+
+
+
 
