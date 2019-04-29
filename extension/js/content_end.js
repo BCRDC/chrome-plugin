@@ -5,10 +5,11 @@
     iFrame.src = chrome.extension.getURL("./../html/contentInform.html");
 
     iFrame.style.position = 'fixed';
-    iFrame.style.top = '70%';
-    iFrame.style.left = '70%';
-    // iFrame.style.width = '100%';   
-    iFrame.style.height = '100%';
+    iFrame.style.bottom = '50px';
+    iFrame.style.right = '20px';
+    iFrame.style.width = '500px';   
+    iFrame.style.height = '140px';
+    iFrame.style.border = '0';
     // iFrame.style.backgroundColor = 'darkred';
 
     iFrame.style.zIndex = 1000;

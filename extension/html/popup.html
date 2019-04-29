@@ -1,27 +1,52 @@
 <!doctype html>
 <html>
-<head>
-        <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
-    <style>
-        body {
-            background: #ededef;
-            width:200px;
-            left: 10px;
-        }
 
-        .form-check-inline{
-            padding-left: 10px;
-        }
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <style>
+
     </style>
     <script src="../js/external/jquery.min.js"></script>
 </head>
+
 <body>
-        <div class="form-check-inline">
+    <div class="card rounded-0 shadow-sm bg-dark text-white" style="width:350px;">
+        <div class="card-header">
+            设置EA数据同步方式
+        </div>
+        <div class="card-body pl-3">
+            <!-- <h5 class="card-title"></h5> -->
+
+            <!--  <div class="form-check-inline">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input autoSending" value="" >自动同步
+                    <input type="checkbox" class="form-check-input autoSending" value="">自动同步
                 </label>
+            </div> -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="0" checked>
+                <label class="form-check-label" for="radio1">
+                    手动同步<small class="text-muted">（手动点击同步按钮进行同步）</small>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="1">
+                <label class="form-check-label" for="radio2">
+                    自动同步<small class="text-muted">（刷新页面进行同步）</small>
+                </label>
+            </div>
+            <p class="card-text text-right pt-5">
+                <a href="#" class="btn btn-sm btn-light rounded-0 shadow-sm">立即同步</a>
+            </p>
+
+        </div>
+        <div class="card-footer text-muted text-center" style="line-height: 15px;">
+            <small>Powered by Blue Cloud Technology. </small><br>
+            <small>Contact us at abus-support@oe.21vianet.com</small>
+        </div>
+    </div>
 </body>
 
 <script src="../js/render.js"></script>
+
 </html>
