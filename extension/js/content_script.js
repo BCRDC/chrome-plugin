@@ -29,6 +29,16 @@
                     sendResponse({ farewell: "goodbye" });
                     break;
                 }
+
+                case 'syncDataToAbus': {
+                    // localStorage.setItem('autoSendingStatus', data)
+                    syncData().then(function(){
+                        sendResponse({ farewell: "goodbye" });
+                    });
+                    
+                    break;
+                }
+
                 case 'getAutoSendingStatus': {
                     const currentAutoSendingStatus = localStorage.getItem('autoSendingStatus') || Status.Open;
                     chrome.runtime.sendMessage({
@@ -36,12 +46,13 @@
                         action: 'fetchedAutoSendingStatus',
                         data: currentAutoSendingStatus
                     }, function (response) {
+                        sendResponse();
                         console.log(response);
                     });
                     break;
                 }
             }
-            sendResponse();
+            
 
         });
 
@@ -129,7 +140,7 @@
 
     const putData = (input) => {
 
-        return createPut('http://localhost:56621/crawler/cache', JSON.stringify(input));
+        return createPut('https://abusapi-dev.chinacloudsites.cn/crawler/cache', JSON.stringify(input));
 
         // var enc = new TextEncoder(); // always utf-8
         // // const array = enc.encode();
@@ -150,9 +161,8 @@
         // });
     }
 
-
-    if (autoSendingStatus === Status.Open) {
-        getEnrollments().then(data => {
+    function syncData() {
+        return getEnrollments().then(data => {
             console.log(data);
             const enroll = data[0];
             const { id } = enroll;
@@ -171,6 +181,11 @@
             });
 
         });
+    }
+
+
+    if (autoSendingStatus === Status.Open) {
+        syncData();
     }
 
 
