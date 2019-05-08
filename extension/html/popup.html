@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
     <style>
@@ -24,19 +25,19 @@
                 </label>
             </div> -->
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="0" checked>
+                <input class="form-check-input" class="manuallySending" type="radio" name="exampleRadios" id="radio1" value="0" checked>
                 <label class="form-check-label" for="radio1">
                     手动同步<small class="text-muted">（手动点击同步按钮进行同步）</small>
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input"  type="radio" name="exampleRadios" id="radio2" value="1">
+                <input class="form-check-input" class="autoSending" type="radio" name="exampleRadios" id="radio2" value="1">
                 <label class="form-check-label" for="radio2">
                     自动同步<small class="text-muted">（刷新页面进行同步）</small>
                 </label>
             </div>
-            <p class="card-text text-right pt-3">
-                <a href="javascript:;" class="btn btn-sm btn-light rounded-0 shadow-sm manuallySending">
+            <p class="card-text text-right pt-3 syncButton">
+                <a href="javascript:;" class="btn btn-sm btn-light rounded-0 shadow-sm manuallySendingButton">
                     <small>立即同步</small>
                 </a>
             </p>

@@ -8,8 +8,8 @@
     const localStorage = window.localStorage;
 
     const Status = {
-        Open: "Open",
-        Close: "Close"
+        Open: "1",
+        Close: "0"
     }
 
     const autoSendingStatus = localStorage.getItem('autoSendingStatus') || Status.Open;
