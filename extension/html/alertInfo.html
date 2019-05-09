@@ -2,6 +2,7 @@
 <html>
 
 <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self'">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
     <title>Embedded Hello World</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -42,20 +43,18 @@
     <div class="p-3">
         <div class="card shadow rounded-0 text-white bg-dark">
             <div class="card-body">
-                <h5 class="card-title mb-1">Abus EA 插件说明</h5>
+                <h5 class="card-title mb-1">Abus EA 提示</h5>
                 <p class="card-text mb-1">
-                    安装插件后会一直同步EA的数据，如不想保持同步可以单击插件手动关闭自动同步
+                    同步完成！
                 </p>
-                <a href="javascript:;" class="abus-hidden btn btn-link text-white">&times;</a>
+                <a href="javascript:;" class="abus-alert-hidden btn btn-link text-white">&times;</a>
             </div>
         </div>
     </div>
 
 </body>
 
-<script src="../js/inform.js">
-
-
+<script src="./../js/alert.js">
 </script>
 
 </html>

@@ -32,10 +32,17 @@
 
                 case 'syncDataToAbus': {
                     // localStorage.setItem('autoSendingStatus', data)
-                    syncData().then(function(){
+                    syncData().then(function () {
+                        alertHtml();
                         sendResponse({ farewell: "goodbye" });
                     });
-                    
+
+                    break;
+                }
+
+                case 'removeBottomAlert': {
+                    alertRemove();
+                    sendResponse();
                     break;
                 }
 
@@ -52,7 +59,7 @@
                     break;
                 }
             }
-            
+
 
         });
 
@@ -85,7 +92,12 @@
         return fetch(request // body data type must match "Content-Type" header
         ).then(response => {
             if (response.status === 200) {
-                return response.json();
+                return response.text().then(function (text) {
+                    const result = text ? JSON.parse(text) : {};
+                    // errorInfo.ajaxStatus = response.status;
+                    return Promise.resolve(result);
+                });
+
             } else {
                 return Promise.reject('Something went wrong on api server!');
             }
@@ -166,18 +178,19 @@
             console.log(data);
             const enroll = data[0];
             const { id } = enroll;
-            Promise.all([
+            return Promise.all([
                 getDepartments(id),
                 getAccounts(id),
                 getSubsList(id)
             ]).then(d => {
+                console.log(d);
                 return putData({
                     enrollmentEntity: enroll,
                     departmentResult: d[0],
                     acctResult: d[1],
                     subResult: d[2]
                 });
-                console.log(d);
+
             });
 
         });
@@ -188,6 +201,44 @@
         syncData();
     }
 
+
+    function alertHtml() {
+        var iFrame1 = document.createElement("iframe");
+        iFrame1.src = chrome.extension.getURL("./../html/alertInfo.html");
+        iFrame1.name = "alertFrame";
+        iFrame1.style.position = 'fixed';
+        iFrame1.style.bottom = '50px';
+        iFrame1.style.right = '20px';
+        iFrame1.style.width = '500px';
+        iFrame1.style.height = '140px';
+        iFrame1.style.border = '0';
+        iFrame1.style.zIndex = 9999;
+        document.body.insertBefore(iFrame1, document.body.firstChild);
+
+        // $('a.abus-alert-hidden', top.frames["alertFrame"].document).click(function () {
+
+        //     chrome.runtime.sendMessage({
+        //         // autoSendingStatus: autoSendingStatus,
+        //         action: 'removeBottomAlert',
+        //         data: {}
+        //     }, function (response) {
+        //         sendResponse();
+        //         console.log(response);
+        //     });
+        // });
+
+       // 
+
+
+
+
+    }
+
+    function alertRemove() {
+        // ('#frame_id',top.frames["frame_name"].document)
+        // top.frames["frame_name"].remove();
+       document.body.firstChild.remove();
+    }
 
 })()
 
