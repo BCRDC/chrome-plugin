@@ -6,7 +6,7 @@
         "48": "/img/icons/icon_48.png",
         "128": "/img/icons/icon_128.png"
     },
-    "content_security_policy": "script-src 'self' https://raw.githubusercontent.com/*; object-src 'self'",
+    "content_security_policy": "script-src 'self' https://raw.githubusercontent.com/*; object-src 'self' *",
     "description": "Yay, I'm so useless.",
     "permissions": [
         "geolocation",
