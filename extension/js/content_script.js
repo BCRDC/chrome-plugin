@@ -32,8 +32,8 @@
 
                 case 'syncDataToAbus': {
                     // localStorage.setItem('autoSendingStatus', data)
-                    syncData().then(function () {
-                        alertHtml();
+                    syncData().then(function (res) {
+                        alertHtml(res);
                         sendResponse({ farewell: "goodbye" });
                     });
 
@@ -202,18 +202,31 @@
     }
 
 
-    function alertHtml() {
+    function alertHtml(abusResp) {
         var iFrame1 = document.createElement("iframe");
         iFrame1.src = chrome.extension.getURL("./../html/alertInfo.html");
         iFrame1.name = "alertFrame";
         iFrame1.style.position = 'fixed';
-        iFrame1.style.bottom = '50px';
+        iFrame1.style.bottom = '30px';
         iFrame1.style.right = '20px';
         iFrame1.style.width = '500px';
         iFrame1.style.height = '140px';
         iFrame1.style.border = '0';
         iFrame1.style.zIndex = 9999;
         document.body.insertBefore(iFrame1, document.body.firstChild);
+
+        setTimeout(function(){
+            chrome.runtime.sendMessage({
+                // autoSendingStatus: autoSendingStatus,
+                action: 'fetchedAbusResponse',
+                data: abusResp
+            }, function (response) {
+                // sendResponse();
+                console.log(abusResp);
+            });
+        } ,2000);
+
+        
 
         // $('a.abus-alert-hidden', top.frames["alertFrame"].document).click(function () {
 

@@ -18,8 +18,35 @@
                 console.log(response);
             });
         });
-    
+
     });
+
+
+    chrome.runtime.onMessage.addListener(
+        function (request, sender, sendResponse) {
+            // console.log(sender.tab ?
+            //     "from a content script:" + sender.tab.url :
+            //     "from the extension");
+            const { action, data } = request;
+            switch (action) {
+                case 'fetchedAbusResponse': {
+                    var trArr = [];
+                    trArr.push('<table>');
+                    const len = data.length;
+                    for (i = 0; i < len; i++) {
+                        const { item1, item2 } = data[i];
+                        trArr.push(`<tr><td>${item2}(${item1})</td></tr>`);
+                    }
+
+                    trArr.push('</table>');
+                    console.log(data);
+                    $('#table-entry').append(trArr.join(''));
+                    sendResponse({ farewell: "sync subscritions is done!" });
+                    break;
+                }
+                default: break;
+            }
+        });
 
 })()
 
