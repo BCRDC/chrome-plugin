@@ -22,6 +22,23 @@
     });
 
 
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        var activeTab = tabs[0];
+        // chrome.tabs.sendMessage(activeTab.id, {
+        //     //  setAutoSendingStatus: status,
+        //     action: 'setAutoSendingStatus',
+        //     data: status
+        // });
+        chrome.tabs.sendMessage(activeTab.id, {
+            // autoSendingStatus: autoSendingStatus,
+            action: 'getAbusResponse',
+            data: {}
+        }, function (response) {
+            console.log(response);
+        });
+    });
+
+
     chrome.runtime.onMessage.addListener(
         function (request, sender, sendResponse) {
             // console.log(sender.tab ?

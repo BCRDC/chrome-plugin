@@ -58,6 +58,18 @@
                     });
                     break;
                 }
+
+                case 'getAbusResponse': {
+                    chrome.runtime.sendMessage({
+                        // autoSendingStatus: autoSendingStatus,
+                        action: 'fetchedAbusResponse',
+                        data: _responseCache
+                    }, function (response) {
+                        // sendResponse();
+                        console.log(abusResp);
+                    });
+
+                }
             }
 
 
@@ -202,6 +214,8 @@
     }
 
 
+    var _responseCache = [];
+
     function alertHtml(abusResp) {
         var iFrame1 = document.createElement("iframe");
         iFrame1.src = chrome.extension.getURL("./../html/alertInfo.html");
@@ -215,18 +229,20 @@
         iFrame1.style.zIndex = 9999;
         document.body.insertBefore(iFrame1, document.body.firstChild);
 
-        setTimeout(function(){
-            chrome.runtime.sendMessage({
-                // autoSendingStatus: autoSendingStatus,
-                action: 'fetchedAbusResponse',
-                data: abusResp
-            }, function (response) {
-                // sendResponse();
-                console.log(abusResp);
-            });
-        } ,2000);
+        _responseCache = abusResp;
 
-        
+        // setTimeout(function(){
+        //     chrome.runtime.sendMessage({
+        //         // autoSendingStatus: autoSendingStatus,
+        //         action: 'fetchedAbusResponse',
+        //         data: abusResp
+        //     }, function (response) {
+        //         // sendResponse();
+        //         console.log(abusResp);
+        //     });
+        // } ,2000);
+
+
 
         // $('a.abus-alert-hidden', top.frames["alertFrame"].document).click(function () {
 
@@ -240,7 +256,7 @@
         //     });
         // });
 
-       // 
+        // 
 
 
 
@@ -250,7 +266,7 @@
     function alertRemove() {
         // ('#frame_id',top.frames["frame_name"].document)
         // top.frames["frame_name"].remove();
-       document.body.firstChild.remove();
+        document.body.firstChild.remove();
     }
 
 })()
