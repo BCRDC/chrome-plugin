@@ -34,23 +34,43 @@
         .btn:hover {
             text-decoration: none;
         }
+
+        #table-entry {
+            overflow-y: auto;
+            height: calc(100% - 50px);
+            margin-top: 15px;
+        }
+
+       /*  #table-entry table tr th, 
+        #table-entry table tr td{
+            padding: 4px;
+        } */
+        #table-entry table tr th:nth-child(1), 
+        #table-entry table tr td:nth-child(1){
+            width: 40%;
+        }
+        #table-entry table tr th:nth-child(2), 
+        #table-entry table tr td:nth-child(2){
+            width: 60%;
+        }
     </style>
 
 </head>
 
 <body>
-    <div class="p-3">
-        <div class="card shadow rounded-0 text-white bg-dark">
-            <div class="card-body">
+    <div class="p-3 h-100">
+        <div class="card shadow rounded-0 text-white bg-dark h-100">
+            <div class="card-body h-100">
                 <h5 class="card-title mb-1">Abus EA 提示</h5>
                 <p class="card-text mb-1">
-                    同步完成(请在24小时后前往ABUS查看新增的订阅)！
+                    同步完成！（请在24小时后前往ABUS查看新增的订阅）
                 </p>
                 <a href="javascript:;" class="abus-alert-hidden btn btn-link text-white">&times;</a>
-            </div>
-            <div id="table-entry">
+                <div id="table-entry">
 
+                </div>
             </div>
+
         </div>
     </div>
 

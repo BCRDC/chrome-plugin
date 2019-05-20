@@ -48,11 +48,15 @@
             switch (action) {
                 case 'fetchedAbusResponse': {
                     var trArr = [];
-                    trArr.push('<table>');
+                    trArr.push(`<table class="table table-hover table-sm table-dark">
+                    <tr><th>订阅名称</th><th>订阅ID</th><tr>`);
                     const len = data.length;
                     for (i = 0; i < len; i++) {
                         const { item1, item2 } = data[i];
-                        trArr.push(`<tr><td>${item2}(${item1})</td></tr>`);
+                        trArr.push(`<tr>
+                        <td>${item2}</td>
+                        <td>${item1}</td>
+                        </tr>`);
                     }
 
                     trArr.push('</table>');

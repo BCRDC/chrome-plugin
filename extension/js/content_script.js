@@ -223,8 +223,8 @@
         iFrame1.style.position = 'fixed';
         iFrame1.style.bottom = '30px';
         iFrame1.style.right = '20px';
-        iFrame1.style.width = '500px';
-        iFrame1.style.height = '140px';
+        iFrame1.style.width = '600px';
+        iFrame1.style.height = '270px';
         iFrame1.style.border = '0';
         iFrame1.style.zIndex = 9999;
         document.body.insertBefore(iFrame1, document.body.firstChild);
