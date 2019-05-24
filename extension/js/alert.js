@@ -53,7 +53,7 @@
                     <tr><th>订阅名称</th><th>订阅ID</th><tr>`);
                     const len = data.length;
                     if (len === 0) {
-                        trArr.push(`<tr><td colspan="2"> <p style="color:red">${now.getHours()}:${now.getMinutes()}，数据已经同步或者没有需要同步的订阅。 </p> </td></tr>`);
+                        trArr.push(`<tr><td colspan="2"> <p style="color:red">刷新时间${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}， 数据已经同步或者没有需要同步的订阅。 </p> </td></tr>`);
                     } else {
                         for (i = 0; i < len; i++) {
                             const { item1, item2 } = data[i];
