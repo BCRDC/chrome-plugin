@@ -164,7 +164,10 @@
 
     const putData = (input) => {
 
-        return createPut('https://abusapi-test.chinacloudsites.cn/crawler/cache', JSON.stringify(input));
+        // https://abusapi.chinacloudsites.cn/crawler/cache
+        // https://abusapi-test.chinacloudsites.cn/crawler/cache
+        return createPut('https://abusapi.chinacloudsites.cn/crawler/cache', JSON.stringify(input));
+        // return createPut('https://abusapi-test.chinacloudsites.cn/crawler/cache', JSON.stringify(input));
 
         // var enc = new TextEncoder(); // always utf-8
         // // const array = enc.encode();
