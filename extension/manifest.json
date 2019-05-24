@@ -7,7 +7,7 @@
         "128": "/img/icons/icon_128.png"
     },
     "content_security_policy": "script-src 'self' https://*; object-src 'self' https://*",
-    "description": "Yay, I'm born for EA.",
+    "description": "Sync EA data collector with ABUS",
     "permissions": [
         "geolocation",
         "*://ea.azure.cn/*",
