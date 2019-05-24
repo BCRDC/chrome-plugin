@@ -47,21 +47,27 @@
             const { action, data } = request;
             switch (action) {
                 case 'fetchedAbusResponse': {
+                    const now = new Date();
                     var trArr = [];
-                    trArr.push(`<table class="table table-hover table-sm table-dark">
+                    trArr.push(`<table class="table table-hover table-sm">
                     <tr><th>订阅名称</th><th>订阅ID</th><tr>`);
                     const len = data.length;
-                    for (i = 0; i < len; i++) {
-                        const { item1, item2 } = data[i];
-                        trArr.push(`<tr>
-                        <td>${item2}</td>
-                        <td>${item1}</td>
-                        </tr>`);
+                    if (len === 0) {
+                        trArr.push(`<tr><td colspan="2"> <p style="color:red">于${now.getHours()}:${now.getMinutes()}:${now.getMilliseconds()}，数据已经同步或者没有需要同步的订阅。 </p> </td></tr>`);
+                    } else {
+                        for (i = 0; i < len; i++) {
+                            const { item1, item2 } = data[i];
+                            trArr.push(`<tr>
+                            <td>${item2}</td>
+                            <td>${item1}</td>
+                            </tr>`);
+                        }
                     }
+
 
                     trArr.push('</table>');
                     console.log(data);
-                    $('#table-entry').append(trArr.join(''));
+                    $('#table-entry').html(trArr.join(''));
                     sendResponse({ farewell: "sync subscritions is done!" });
                     break;
                 }

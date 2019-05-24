@@ -66,7 +66,7 @@
                         data: _responseCache
                     }, function (response) {
                         // sendResponse();
-                        console.log(abusResp);
+                        console.log(_responseCache);
                     });
 
                 }
@@ -217,17 +217,31 @@
     var _responseCache = [];
 
     function alertHtml(abusResp) {
-        var iFrame1 = document.createElement("iframe");
-        iFrame1.src = chrome.extension.getURL("./../html/alertInfo.html");
-        iFrame1.name = "alertFrame";
-        iFrame1.style.position = 'fixed';
-        iFrame1.style.bottom = '30px';
-        iFrame1.style.right = '20px';
-        iFrame1.style.width = '600px';
-        iFrame1.style.height = '270px';
-        iFrame1.style.border = '0';
-        iFrame1.style.zIndex = 9999;
-        document.body.insertBefore(iFrame1, document.body.firstChild);
+        const frame = $( "iframe[name='alertFrame']" )
+        if (frame && frame.length > 0) {
+            chrome.runtime.sendMessage({
+                // autoSendingStatus: autoSendingStatus,
+                action: 'fetchedAbusResponse',
+                data: abusResp
+            }, function (response) {
+                // sendResponse();
+                console.log(_responseCache);
+            });
+        } else {
+            var iFrame1 = document.createElement("iframe");
+            iFrame1.src = chrome.extension.getURL("./../html/alertInfo.html");
+            iFrame1.name = "alertFrame";
+            iFrame1.style.position = 'fixed';
+            iFrame1.style.bottom = '30px';
+            iFrame1.style.right = '20px';
+            iFrame1.style.width = '600px';
+            iFrame1.style.height = '270px';
+            iFrame1.style.border = '0';
+            iFrame1.style.zIndex = 9999;
+            document.body.insertBefore(iFrame1, document.body.firstChild);
+        }
+
+
 
         _responseCache = abusResp;
 
@@ -266,7 +280,8 @@
     function alertRemove() {
         // ('#frame_id',top.frames["frame_name"].document)
         // top.frames["frame_name"].remove();
-        document.body.firstChild.remove();
+        const frame = $( "iframe[name='alertFrame']" )
+        frame.remove();
     }
 
 })()

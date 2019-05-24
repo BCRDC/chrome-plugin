@@ -2,19 +2,61 @@
 <html>
 
 <head>
-    
+
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
     <style>
+        .card {
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+            font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
+        }
 
+        .card-header {
+
+            background: rgba(255, 255, 255, 1);
+        }
+
+
+        .card-header span {
+
+            font-size: 14px;
+            font-weight: bold;
+            color: rgba(51, 51, 51, 1);
+            line-height: 18px;
+        }
+
+        .card-body {
+            background: #F3F3F3
+        }
+
+        .card-footer {
+            background: #E7E7E7;
+            font-weight: 400;
+            color: rgba(102, 102, 102, 1);
+
+        }
+
+        .form-check .form-check-label {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+        }
+
+        .manuallySendingButton {
+            background: rgba(48, 165, 253, 1);
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(254, 255, 255, 1);
+            line-height: 18px;
+        }
     </style>
     <script src="../js/external/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="card rounded-0 shadow-sm bg-dark text-white" style="width:350px; font-size: 14px;">
+    <div class="card rounded-0 shadow-sm  text-white" style="width:350px; font-size: 14px;">
         <div class="card-header">
-            设置EA数据同步方式
+            <span>设置EA数据同步方式</span>
         </div>
         <div class="card-body pl-3">
             <!-- <h5 class="card-title"></h5> -->
@@ -25,20 +67,22 @@
                 </label>
             </div> -->
             <div class="form-check">
-                <input class="form-check-input" class="manuallySending" type="radio" name="exampleRadios" id="radio1" value="0" checked>
+                <input class="form-check-input" class="manuallySending" type="radio" name="exampleRadios" id="radio1"
+                    value="0" checked>
                 <label class="form-check-label" for="radio1">
                     手动同步<small class="text-muted">（手动点击同步按钮进行同步）</small>
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" class="autoSending" type="radio" name="exampleRadios" id="radio2" value="1">
+                <input class="form-check-input" class="autoSending" type="radio" name="exampleRadios" id="radio2"
+                    value="1">
                 <label class="form-check-label" for="radio2">
                     自动同步<small class="text-muted">（刷新页面进行同步）</small>
                 </label>
             </div>
             <p class="card-text text-right pt-3 syncButton">
                 <a href="javascript:;" class="btn btn-sm btn-light rounded-0 shadow-sm manuallySendingButton">
-                    <small>立即同步</small>
+                    <small class="manuallySendingButtonContent">立即同步</small>
                 </a>
             </p>
 

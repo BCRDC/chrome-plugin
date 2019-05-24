@@ -19,13 +19,19 @@
             switch (action) {
                 case 'fetchedAutoSendingStatus': {
                     $(`input[name='exampleRadios'][value=${status}]`).prop('checked', true);
+
                     if (status === '0') {
                         $("p.syncButton")[0].style.display = '';
                     } else {
                         $("p.syncButton")[0].style.display = 'none';
                     }
-                    sendResponse({ farewell: "goodbye" });
+                    sendResponse({ farewell: "sync status done!" });
                     break;
+                }
+
+                case 'fetchedAbusResponse': {
+                    $(".manuallySendingButtonContent").text('立即同步');
+                    sendResponse({ farewell: "sync abus data done!" });
                 }
                 default: break;
             }
@@ -56,6 +62,7 @@
         let select = $("input[name='exampleRadios']:checked").val();
 
         if (select === "0") {
+            $(".manuallySendingButtonContent").text('同步中...');
             chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
                 var activeTab = tabs[0];
                 // chrome.tabs.sendMessage(activeTab.id, {
